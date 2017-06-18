@@ -106,6 +106,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release xcopy /Y $(TargetPath) $(ProjectDir)executable</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release xcopy /Y /C /R $(TargetPath) $(ProjectDir)executable</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>
