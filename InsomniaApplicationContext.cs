@@ -15,6 +15,7 @@
 */
 
 using System;
+using System.Configuration;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -41,8 +42,18 @@ namespace Insomnia
 
         private void InitializeComponent()
         {
-            // three minutes
-            _timer = new System.Timers.Timer(180000);
+            if (int.TryParse(ConfigurationManager.AppSettings["interval"], out int interval))
+            {
+                // convert minutes to milliseconds
+                interval *= 60000;
+            }
+            else
+            {
+                // default to three minutes
+                interval = 180000;
+            }
+
+            _timer = new System.Timers.Timer(interval);
             _timer.Elapsed += OnTimeElapsed;
             _timer.AutoReset = true;
             _timer.Enabled = true;
